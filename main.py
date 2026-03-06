@@ -12,8 +12,7 @@ from astrbot.core.utils.astrbot_path import get_astrbot_data_path
 class KeeperPlugin(Star):
     def __init__(self, context: Context, config: dict | None = None):
         super().__init__(context)
-        db_file = Path(get_astrbot_data_path())  / "keeper" / "accounting.db"
-        self.db = DatabaseManager(f"sqlite://{db_file}")
+        self.db = DatabaseManager(f"sqlite:///data/astrbot_plugin_keeper/accounting.db")
         self.whitelist = config.get("whitelist", [])
 
     def _get_user_id(self, event: AstrMessageEvent) -> str:
