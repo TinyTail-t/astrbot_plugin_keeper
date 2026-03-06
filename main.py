@@ -1,4 +1,5 @@
 import json
+import os
 from datetime import datetime
 from pathlib import Path
 
@@ -12,7 +13,9 @@ from astrbot.core.utils.astrbot_path import get_astrbot_data_path
 class KeeperPlugin(Star):
     def __init__(self, context: Context, config: dict | None = None):
         super().__init__(context)
-        self.db = DatabaseManager(f"sqlite:///data/astrbot_plugin_keeper/accounting.db")
+        # base = get_astrbot_data_path()
+        os.mkdir('data/plugin_data/astrbot_plugin_keeper/')
+        self.db = DatabaseManager("sqlite:///data/plugin_data/astrbot_plugin_keeper/accounting.db")
         self.whitelist = config.get("whitelist", [])
 
     def _get_user_id(self, event: AstrMessageEvent) -> str:
