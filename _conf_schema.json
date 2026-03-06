@@ -1,0 +1,8 @@
+{
+  "whitelist": {
+    "description": "允许使用记账功能的用户账号列表",
+    "type": "list",
+    "hint": "填写用户ID或用户名，只有列表中的用户才能使用记账功能",
+    "default": []
+  }
+}

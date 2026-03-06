@@ -1,0 +1,6 @@
+name: astrbot_plugin_keeper
+display_name: keeper
+desc: AstrBot 记账插件
+version: v1.1.0
+author: TinyTail
+repo: https://github.com/TinyTail-t/astrbot_plugin_keeper
