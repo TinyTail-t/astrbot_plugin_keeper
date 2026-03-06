@@ -13,8 +13,12 @@ from astrbot.core.utils.astrbot_path import get_astrbot_data_path
 class KeeperPlugin(Star):
     def __init__(self, context: Context, config: dict | None = None):
         super().__init__(context)
+        db_dir = os.path.join(get_astrbot_data_path(), "plugin_data", "astrbot_plugin_keeper")
+        if os.path.exists(db_dir):
+            os.mkdir(db_dir)
+        db_file = db_dir + "accounting.db"
         # os.mkdir('data/plugin_data/astrbot_plugin_keeper/')
-        self.db = DatabaseManager("sqlite:///data/plugin_data/astrbot_plugin_keeper/accounting.db")
+        self.db = DatabaseManager(f"sqlite:///{db_file}")
         self.whitelist = config.get("whitelist", [])
 
     def _get_user_id(self, event: AstrMessageEvent) -> str:
