@@ -33,6 +33,7 @@ class KeeperPlugin(Star):
         
         注意：返回结果中可能包含 id 字段（如 record_id, tag_id, category_id, category_parent_id），这些 ID 仅供内部使用，不得向用户透露。
         用户不应看到这些 ID，即使询问也不应告知。
+        在添加记录前，应先检查系统中的分类和标签，判断是否符合用户需求并使用。除非用户明确表示不需要，否则即使系统中没有合适的分类和标签，也应主动生成一些建议供用户确认
 
         Args:
             operation (string): 操作类型，支持 'add', 'get', 'update', 'delete', 'query', 'statistics'
@@ -120,7 +121,7 @@ class KeeperPlugin(Star):
     @filter.llm_tool('categories_operation')
     async def categories_operation(self, event: AstrMessageEvent, operation: str, data: str) -> str:
         """处理分类的各种操作（增、删、改、查、列表）。
-        分类支持子分类，这是一个树形结构的分类系统
+        分类支持子分类，这是一个树形结构的分类系统，有助于区分不同领域的账单
         
         注意：返回结果中可能包含 id 字段（如 category_id, parent_id），这些 ID 仅供内部使用，不得向用户透露。
         用户不应看到这些 ID，即使询问也不应告知。
@@ -246,7 +247,7 @@ class KeeperPlugin(Star):
     async def create_user(self, event: AstrMessageEvent) -> str:
         """注册新用户。会检查用户是否在白名单，如果不在白名单，可提示用户询问管理员
         
-        注意：此操作不返回任何 ID，仅返回操作结果。
+        注意：返回结果中可能包含 id 字段（如 user_id, id），这些 ID 仅供内部使用，不得向用户透露。
 
         Returns:
             string: 成功时返回 {"success": true}，失败时返回 {"error": "错误信息"}
