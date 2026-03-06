@@ -12,7 +12,7 @@ from astrbot.core.utils.astrbot_path import get_astrbot_data_path
 class KeeperPlugin(Star):
     def __init__(self, context: Context, config: dict | None = None):
         super().__init__(context)
-        db_file = Path(get_astrbot_data_path()  / "keeper" / "accounting.db")
+        db_file = Path(get_astrbot_data_path())  / "keeper" / "accounting.db"
         self.db = DatabaseManager(f"sqlite://{db_file}")
         self.whitelist = config.get("whitelist", [])
 
